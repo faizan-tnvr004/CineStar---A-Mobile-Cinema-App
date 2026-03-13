@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Assignment1</string>
+    <string name="logo">
+        Cine<font color="white">Fast</font>
+
+    </string>
+    <string name="select_date">Select Date</string>
+    <string name="movies_today">Movies Today</string>
+    <string name="tomorrow">Tomorrow</string>
+</resources>

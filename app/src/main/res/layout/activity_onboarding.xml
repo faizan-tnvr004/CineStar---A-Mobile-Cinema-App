@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/red"
+    tools:context=".Splash"
+   >
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_dash"
+        android:id="@+id/bgBars"
+        >
+
+    </ImageView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grad"
+        android:id="@+id/gradView"
+
+        ></View>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:paddingBottom="100dp"
+>
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="serif-monospace"
+
+
+        android:text=" Welcome To The Best"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom|center"
+        android:fontFamily="serif-monospace"
+
+        android:text="Cinema In Town!"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+
+        ></TextView>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom|center"
+        android:fontFamily="serif-monospace"
+
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
+        android:textColor="@color/white"
+        android:textSize="20sp"
+
+        ></TextView>
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:shadowColor="@color/red"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Get Started"
+        android:textSize="20sp"
+        android:id="@+id/Btnstart"
+
+
+        android:backgroundTint="@color/light_red"
+        ></Button>
+</LinearLayout>
+</FrameLayout>

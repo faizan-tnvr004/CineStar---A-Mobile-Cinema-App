@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeScreen"
+    android:orientation="vertical"
+    android:background="@color/black"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoetvb"
+        android:text="@string/logo"
+        android:textColor="@color/light_red"
+        android:textSize="40sp">
+
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="#D3D3D3"
+        android:text="@string/select_date"
+        android:layout_marginLeft="11dp"
+    ></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movies_today"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+
+            android:backgroundTint="@color/light_red"
+            app:icon="@drawable/ic_launcher_background"
+
+            ></com.google.android.material.button.MaterialButton>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/tomorrow"
+            android:textColor="#8892B0"
+            android:textSize="15sp"
+            app:backgroundTint="#1C2230"
+            app:icon="@drawable/ic_launcher_foreground"
+            >
+
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:text="Now Showing"
+        android:layout_marginLeft="11dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/segoetvbt"
+        ></TextView>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:backgroundTint="#21293B"
+
+        android:layout_margin="10dp"
+        app:cardCornerRadius="16dp"
+        app:cardPreventCornerOverlap="true"
+
+        >
+>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/frank"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+
+          >
+
+
+        </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frankenstein"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:fontFamily="@font/segoetvb"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center|top"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/m1"
+
+
+            ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sci-fi/150 min"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/segoetvr"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="top"
+                android:layout_marginLeft="140dp"
+
+
+                ></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/light_red"
+                    android:text="Book"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="120dp"
+                    android:id="@+id/BtnM1R"
+
+
+                    ></Button>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Trailer"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/play"
+                    app:iconTint="@color/black"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
+                    android:id="@+id/BtnM1t">
+
+                </com.google.android.material.button.MaterialButton>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+<!--    movie 2-->
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:backgroundTint="#21293B"
+
+        android:layout_margin="10dp"
+        app:cardCornerRadius="16dp"
+        app:cardPreventCornerOverlap="true"
+
+        >
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/zoo"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+
+            >
+
+
+        </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zootopia"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:fontFamily="@font/segoetvb"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center|top"
+                android:id="@+id/m2"
+
+
+
+                ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comedy/147 min"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/segoetvr"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center|top"
+
+
+
+                ></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/light_red"
+                    android:text="Book"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="120dp"
+                    android:id="@+id/BtnM2R"
+
+                    ></Button>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Trailer"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/play"
+                    app:iconTint="@color/black"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
+                    android:id="@+id/BtnM2t">
+
+                </com.google.android.material.button.MaterialButton>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <!--    movie 3-->
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:backgroundTint="#21293B"
+
+        android:layout_margin="10dp"
+        app:cardCornerRadius="16dp"
+        app:cardPreventCornerOverlap="true"
+
+        >
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/donkey"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+
+            >
+
+
+        </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Donkey king"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:fontFamily="@font/segoetvb"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center|top"
+                android:layout_marginLeft="17dp"
+                android:id="@+id/m3"
+
+
+
+
+                ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comedy/105 min"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/segoetvr"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center|top"
+
+
+
+                ></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/light_red"
+                    android:text="Book"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="120dp"
+                    android:id="@+id/BtnM3R"
+
+                    ></Button>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Trailer"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/play"
+                    app:iconTint="@color/black"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
+                    android:id="@+id/BtnM3t">
+
+                </com.google.android.material.button.MaterialButton>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
