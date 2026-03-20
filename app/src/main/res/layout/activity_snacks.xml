@@ -97,6 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:layout_marginRight="100dp"
                         android:orientation="horizontal">
 
                         <Button
@@ -106,7 +107,7 @@
                             android:layout_weight="1"
                             android:backgroundTint="@color/light_red"
                             android:text="-"
-                            android:textSize="30dp"
+                            android:textSize="20sp"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -126,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/light_red"
-                            android:textSize="30dp"
+                            android:textSize="20sp"
 
                             android:text="+"
                             android:textColor="@color/white" />
