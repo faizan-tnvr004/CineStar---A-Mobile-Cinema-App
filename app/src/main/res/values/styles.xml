@@ -25,6 +25,8 @@
         <item name="android:insetBottom">0dp</item>
     </style>
 
-
+    <style name="RoundedImageStyle">
+        <item name="cornerSize">8dp</item>
+    </style>
 
 </resources>

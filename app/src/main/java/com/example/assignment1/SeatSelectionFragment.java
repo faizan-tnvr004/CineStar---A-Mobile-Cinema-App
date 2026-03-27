@@ -25,7 +25,7 @@ public class SeatSelectionFragment extends Fragment {
     String movieName;
     String trailerUrl;
     boolean isComingSoon;
-
+    int posterResId;
     TextView seatCountText;
     ArrayList<String> seats = new ArrayList<>();
     int selectedCount = 0;
@@ -44,6 +44,7 @@ public class SeatSelectionFragment extends Fragment {
             movieName    = args.getString("movieName", "");
             trailerUrl   = args.getString("trailerUrl", "");
             isComingSoon = args.getBoolean("isComingSoon", false);
+            posterResId = args.getInt("posterResId", R.drawable.frank);
         }
 
         txtTitle      = view.findViewById(R.id.txtTitle);
@@ -87,6 +88,7 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putString("movieName", movieName);
             bundle.putStringArrayList("selectedSeats", seats);
             bundle.putInt("seatCount", selectedCount);
+            bundle.putInt("posterResId", posterResId);
             snacksFrag.setArguments(bundle);
             ((MainActivity) requireActivity()).navigateTo(snacksFrag);
         });
@@ -103,7 +105,9 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putStringArrayList("selectedSeats", seats);
             bundle.putInt("seatCount", selectedCount);
             bundle.putDouble("snackTotal", 0.0);
+            bundle.putInt("posterResId", posterResId);
             summaryFrag.setArguments(bundle);
+
             ((MainActivity) requireActivity()).navigateTo(summaryFrag);
             Toast.makeText(getContext(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
         });

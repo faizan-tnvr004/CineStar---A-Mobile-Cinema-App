@@ -62,7 +62,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             bundle.putString("movieName", movie.getName());
             bundle.putString("movieGenre", movie.getGenre());
             bundle.putString("trailerUrl", movie.getTrailerUrl());
-            bundle.putBoolean("isComingSoon", isComingSoon); // pass the tab type
+            bundle.putBoolean("isComingSoon", isComingSoon);
+            bundle.putInt("posterResId", movie.getPosterResId());
             seatFrag.setArguments(bundle);
             ((MainActivity) activity).navigateTo(seatFrag);
             seatFrag.setArguments(bundle);

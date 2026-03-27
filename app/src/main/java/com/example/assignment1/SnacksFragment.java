@@ -72,6 +72,7 @@ public class SnacksFragment extends Fragment {
             bundle.putInt("pizzaQty",   snackList.get(1).getQuantity());
             bundle.putInt("drinkQty",   snackList.get(2).getQuantity());
             bundle.putInt("nachosQty",  snackList.get(3).getQuantity());
+            bundle.putInt("posterResId", getArguments() != null ? getArguments().getInt("posterResId") : 0);
             summaryFrag.setArguments(bundle);
 
             ((MainActivity) requireActivity()).navigateTo(summaryFrag);
