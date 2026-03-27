@@ -24,7 +24,7 @@ public class onboarding extends AppCompatActivity {
         });
         init();
         Btnstart.setOnClickListener(v->{
-            startActivity(new Intent(this,HomeScreen.class));
+            startActivity(new Intent(this,MainActivity.class));
           //  finish();
         });
     }

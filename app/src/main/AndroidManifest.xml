@@ -12,12 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
         <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Assignment1" />
+        <activity
             android:name=".BookingActivity"
             android:exported="false" />
         <activity
             android:name=".SnacksActivity"
             android:exported="false" />
-
         <activity
             android:name=".SeatSelection"
             android:exported="false" />
