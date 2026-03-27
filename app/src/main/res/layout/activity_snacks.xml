@@ -185,18 +185,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginRight="100dp"
+                        >
 
                         <Button
                             android:id="@+id/minus2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="30dp"
-
                             android:backgroundTint="@color/light_red"
                             android:text="-"
-                            android:textColor="@color/white" />
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            />
 
                         <TextView
                             android:id="@+id/qty2"
@@ -215,7 +217,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/light_red"
-                            android:textSize="30dp"
+                            android:textSize="20sp"
 
                             android:text="+"
                             android:textColor="@color/white" />
@@ -273,13 +275,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginRight="100dp"
+                        >
 
                         <Button
                             android:id="@+id/minus3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="30dp"
+                            android:textSize="18dp"
 
                             android:layout_weight="1"
                             android:backgroundTint="@color/light_red"
@@ -300,7 +304,7 @@
                         <Button
                             android:id="@+id/plus3"
                             android:layout_width="0dp"
-                            android:textSize="30dp"
+                            android:textSize="20sp"
 
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -361,18 +365,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginRight="100dp"
+                        >
 
                         <Button
                             android:id="@+id/minus4"
-                            android:textSize="30dp"
+                            android:textSize="18dp"
 
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/light_red"
                             android:text="-"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+
+                            />
 
                         <TextView
                             android:id="@+id/qty4"
@@ -389,7 +397,7 @@
                             android:id="@+id/plus4"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="30dp"
+                            android:textSize="20sp"
 
                             android:layout_weight="1"
                             android:backgroundTint="@color/light_red"
