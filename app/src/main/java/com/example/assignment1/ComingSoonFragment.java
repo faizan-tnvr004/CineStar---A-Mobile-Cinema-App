@@ -26,11 +26,11 @@ public class ComingSoonFragment extends Fragment {
         // Add at least 3 upcoming movies here — use any drawables you have
         ArrayList<Movie> movies = new ArrayList<>();
         movies.add(new Movie("Inception", "Sci-fi", "148 min",
-                "https://www.youtube.com/watch?v=YoHD9XEInc0", R.drawable.frank));
+                "https://www.youtube.com/watch?v=YoHD9XEInc0", R.drawable.inception));
         movies.add(new Movie("The Lion King", "Animation", "118 min",
-                "https://www.youtube.com/watch?v=7TavVZMewpY", R.drawable.zoo));
+                "https://www.youtube.com/watch?v=7TavVZMewpY", R.drawable.lionking));
         movies.add(new Movie("Spider-Man", "Action", "148 min",
-                "https://www.youtube.com/watch?v=JfVOs4VSpmA", R.drawable.donkey));
+                "https://www.youtube.com/watch?v=JfVOs4VSpmA", R.drawable.spiderman));
 
         RecyclerView recycler = view.findViewById(R.id.recyclerMovies);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));

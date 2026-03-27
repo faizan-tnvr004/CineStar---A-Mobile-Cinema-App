@@ -3,6 +3,7 @@ package com.example.assignment1;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,15 +46,18 @@ public class SeatSelectionFragment extends Fragment {
             trailerUrl   = args.getString("trailerUrl", "");
             isComingSoon = args.getBoolean("isComingSoon", false);
             posterResId = args.getInt("posterResId", R.drawable.frank);
+
+            seats = args.getStringArrayList("selectedSeats") != null
+                    ? args.getStringArrayList("selectedSeats")
+                    : new ArrayList<>();
+            selectedCount = args.getInt("seatCount", 0);
         }
 
         txtTitle      = view.findViewById(R.id.txtTitle);
         btnBack       = view.findViewById(R.id.btnBack);
         seatCountText = view.findViewById(R.id.seatCountText);
-
         txtTitle.setText(movieName);
 
-        // Back always returns to HomeFragment
         btnBack.setOnClickListener(v ->
                 ((MainActivity) requireActivity()).navigateTo(new HomeFragment()));
 
@@ -65,12 +69,30 @@ public class SeatSelectionFragment extends Fragment {
         } else {
             setupNowShowingMode(btnSnacks, btnBook);
             setupSeatSelector(view);
+            restoreSelectedSeats(view);
+            updateSeatCount();
         }
 
         return view;
     }
 
-    // ── NOW SHOWING ────────────────────────────────────────────────────────────
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Get back seats from SnacksFragment
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("selectedSeats") && args.containsKey("seatCount")) {
+            ArrayList<String> returnedSeats = args.getStringArrayList("selectedSeats");
+            int returnedCount = args.getInt("seatCount", 0);
+            if (returnedSeats != null) {
+                seats.clear();
+                seats.addAll(returnedSeats);
+                selectedCount = returnedCount;
+                restoreSelectedSeats(getView());
+                updateSeatCount();
+            }
+        }
+    }
 
     private void setupNowShowingMode(Button btnSnacks, Button btnBook) {
         btnSnacks.setVisibility(View.VISIBLE);
@@ -90,6 +112,7 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putInt("seatCount", selectedCount);
             bundle.putInt("posterResId", posterResId);
             snacksFrag.setArguments(bundle);
+            Log.d("SeatSelection", "Sending seats: " + seats + ", count: " + selectedCount);
             ((MainActivity) requireActivity()).navigateTo(snacksFrag);
         });
 
@@ -98,7 +121,6 @@ public class SeatSelectionFragment extends Fragment {
                 Toast.makeText(getContext(), "Please select at least one seat", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // Skip snacks — go straight to summary
             TicketSummaryFragment summaryFrag = new TicketSummaryFragment();
             Bundle bundle = new Bundle();
             bundle.putString("movieName", movieName);
@@ -107,26 +129,16 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putDouble("snackTotal", 0.0);
             bundle.putInt("posterResId", posterResId);
             summaryFrag.setArguments(bundle);
-
             ((MainActivity) requireActivity()).navigateTo(summaryFrag);
             Toast.makeText(getContext(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
         });
     }
 
-    // ── COMING SOON ────────────────────────────────────────────────────────────
-
     private void setupComingSoonMode(View view, Button btnSnacks, Button btnBook) {
-
-        // Disable the entire seat grid
         GridLayout grid = view.findViewById(R.id.seatGrid);
-        for (int i = 0; i < grid.getChildCount(); i++) {
-            grid.getChildAt(i).setEnabled(false);
-        }
+        for (int i = 0; i < grid.getChildCount(); i++) grid.getChildAt(i).setEnabled(false);
 
-        // Hide seat count
         seatCountText.setVisibility(View.GONE);
-
-        // Repurpose the two buttons
         btnSnacks.setText("Coming Soon");
         btnSnacks.setEnabled(false);
         btnSnacks.setVisibility(View.VISIBLE);
@@ -140,18 +152,15 @@ public class SeatSelectionFragment extends Fragment {
         });
     }
 
-    // ── SEAT SELECTOR (Now Showing only) ───────────────────────────────────────
-
     private void setupSeatSelector(View view) {
         GridLayout grid = view.findViewById(R.id.seatGrid);
 
         for (int i = 0; i < grid.getChildCount(); i++) {
             View child = grid.getChildAt(i);
             if (!(child instanceof Button)) continue;
-
             Button seat = (Button) child;
 
-            // Hardcode some reserved seats
+            // Hardcoded reserved seats
             if (seat.getId() == R.id.A1 ||
                     seat.getId() == R.id.B4 ||
                     seat.getId() == R.id.C7) {
@@ -164,22 +173,35 @@ public class SeatSelectionFragment extends Fragment {
             }
 
             seat.setOnClickListener(v -> {
-                if ("reserved".equals(seat.getTag())) {
-                    return;
-                } else if ("available".equals(seat.getTag())) {
+                if ("reserved".equals(seat.getTag())) return;
+
+                String seatName = seat.getText().toString();
+                if ("available".equals(seat.getTag())) {
                     seat.setBackgroundResource(R.drawable.seat_selected);
                     seat.setTag("selected");
-                    seats.add(seat.getText().toString());
+                    seats.add(seatName);
                     selectedCount++;
-                    updateSeatCount();
                 } else if ("selected".equals(seat.getTag())) {
                     seat.setBackgroundResource(R.drawable.seat_available);
                     seat.setTag("available");
-                    seats.remove(seat.getText().toString());
+                    seats.remove(seatName);
                     selectedCount--;
-                    updateSeatCount();
                 }
+                updateSeatCount();
             });
+        }
+    }
+
+    private void restoreSelectedSeats(View view) {
+        GridLayout grid = view.findViewById(R.id.seatGrid);
+        for (int i = 0; i < grid.getChildCount(); i++) {
+            View child = grid.getChildAt(i);
+            if (!(child instanceof Button)) continue;
+            Button seat = (Button) child;
+            if (seats.contains(seat.getText().toString())) {
+                seat.setBackgroundResource(R.drawable.seat_selected);
+                seat.setTag("selected");
+            }
         }
     }
 

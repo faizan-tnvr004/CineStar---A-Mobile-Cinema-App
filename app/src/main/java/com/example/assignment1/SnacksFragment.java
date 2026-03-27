@@ -1,6 +1,7 @@
 package com.example.assignment1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,13 +35,15 @@ public class SnacksFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_snacks, container, false);
-
+        Log.d("SnacksFragment", "Received seats: " + selectedSeats + ", seatCount: " + seatCount);
         // Receive bundle data
         Bundle args = getArguments();
         if (args != null) {
             movieName     = args.getString("movieName", "");
             selectedSeats = args.getStringArrayList("selectedSeats");
             seatCount     = args.getInt("seatCount", 0);
+
+
         }
 
         tvTotal = view.findViewById(R.id.tvSnackTotal);
@@ -93,4 +97,30 @@ public class SnacksFragment extends Fragment {
         }
         return total;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Intercept the system back button
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Prepare bundle to send back
+                Bundle result = new Bundle();
+                result.putString("movieName", movieName);
+                result.putStringArrayList("selectedSeats", selectedSeats);
+                result.putInt("seatCount", seatCount);
+                result.putInt("posterResId", getArguments() != null ? getArguments().getInt("posterResId") : 0);
+
+                // Send data back
+                getParentFragmentManager().setFragmentResult("snack_request", result);
+
+                // Navigate back
+                setEnabled(false); // disable callback to let default behavior happen
+                requireActivity().onBackPressed();
+            }
+        });
+    }
 }
+
