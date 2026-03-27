@@ -34,7 +34,7 @@ public class ComingSoonFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recyclerMovies);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        recycler.setAdapter(new MovieAdapter(requireActivity(), movies));
+        recycler.setAdapter(new MovieAdapter(requireActivity(), movies, true));
 
         return view;
     }

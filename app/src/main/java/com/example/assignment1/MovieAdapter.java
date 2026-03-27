@@ -23,11 +23,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private ArrayList<Movie> movieList;
     private FragmentActivity activity;
 
-    public MovieAdapter(FragmentActivity activity, ArrayList<Movie> movieList) {
-        this.activity = activity;
-        this.movieList = movieList;
+    // Updated constructor
+    public MovieAdapter(FragmentActivity activity, ArrayList<Movie> movieList, boolean isComingSoon) {
+        this.activity     = activity;
+        this.movieList    = movieList;
+        this.isComingSoon = isComingSoon;
     }
 
+    // Add this field at the top
+    private boolean isComingSoon;
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -57,6 +61,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             Bundle bundle = new Bundle();
             bundle.putString("movieName", movie.getName());
             bundle.putString("movieGenre", movie.getGenre());
+            bundle.putString("trailerUrl", movie.getTrailerUrl());
+            bundle.putBoolean("isComingSoon", isComingSoon); // pass the tab type
+            seatFrag.setArguments(bundle);
+            ((MainActivity) activity).navigateTo(seatFrag);
             seatFrag.setArguments(bundle);
 
             activity.getSupportFragmentManager()
@@ -87,4 +95,5 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             btnTrailer      = itemView.findViewById(R.id.btnTrailer);
         }
     }
+
 }

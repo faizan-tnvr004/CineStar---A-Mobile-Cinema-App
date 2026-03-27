@@ -33,7 +33,7 @@ public class NowShowingFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recyclerMovies);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        recycler.setAdapter(new MovieAdapter(requireActivity(), movies));
+        recycler.setAdapter(new MovieAdapter(requireActivity(), movies, false));
 
         return view;
     }
