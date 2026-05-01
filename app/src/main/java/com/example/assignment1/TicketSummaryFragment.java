@@ -43,6 +43,20 @@ public class TicketSummaryFragment extends Fragment {
     private final double DRINK_PRICE  = 6.99;
     private final double NACHOS_PRICE = 15.00;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            bookingSaved = savedInstanceState.getBoolean("bookingSaved", false);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("bookingSaved", bookingSaved);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -164,6 +178,20 @@ public class TicketSummaryFragment extends Fragment {
                 totalPrice, dateTime, posterDrawableName);
 
         bookingsRef.child(bookingId).setValue(booking);
+
+        // Also save booked seats locally so they appear reserved in the UI
+        saveBookedSeatsLocally(movieName, getArguments() != null ? getArguments().getStringArrayList("selectedSeats") : new ArrayList<>());
+    }
+
+    private void saveBookedSeatsLocally(String movieName, ArrayList<String> bookedSeats) {
+        if (bookedSeats == null || bookedSeats.isEmpty()) return;
+        SharedPreferences prefs = requireActivity()
+                .getSharedPreferences("booked_seats", Context.MODE_PRIVATE);
+        // Get existing booked seats for this movie and add new ones
+        java.util.Set<String> existing = prefs.getStringSet(movieName, new java.util.HashSet<>());
+        java.util.Set<String> updated = new java.util.HashSet<>(existing);
+        updated.addAll(bookedSeats);
+        prefs.edit().putStringSet(movieName, updated).apply();
     }
 
     // ── Add a snack row dynamically (only if qty > 0) ─────────────────────

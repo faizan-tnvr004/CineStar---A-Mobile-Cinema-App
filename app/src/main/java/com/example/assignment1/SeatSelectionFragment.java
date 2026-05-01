@@ -129,9 +129,6 @@ public class SeatSelectionFragment extends Fragment {
                 return;
             }
 
-            // Save booked seats to SharedPreferences so they show as reserved next time
-            saveBookedSeats(movieName, seats);
-
             TicketSummaryFragment summaryFrag = new TicketSummaryFragment();
             Bundle bundle = new Bundle();
             bundle.putString("movieName", movieName);
