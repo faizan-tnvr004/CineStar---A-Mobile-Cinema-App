@@ -1,6 +1,8 @@
 package com.example.assignment1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SeatSelectionFragment extends Fragment {
 
@@ -121,6 +125,10 @@ public class SeatSelectionFragment extends Fragment {
                 Toast.makeText(getContext(), "Please select at least one seat", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            // Save booked seats to SharedPreferences so they show as reserved next time
+            saveBookedSeats(movieName, seats);
+
             TicketSummaryFragment summaryFrag = new TicketSummaryFragment();
             Bundle bundle = new Bundle();
             bundle.putString("movieName", movieName);
@@ -155,13 +163,24 @@ public class SeatSelectionFragment extends Fragment {
     private void setupSeatSelector(View view) {
         GridLayout grid = view.findViewById(R.id.seatGrid);
 
+        // Load previously booked seats for this movie
+        Set<String> previouslyBooked = getBookedSeats(movieName);
+
         for (int i = 0; i < grid.getChildCount(); i++) {
             View child = grid.getChildAt(i);
             if (!(child instanceof Button)) continue;
             Button seat = (Button) child;
 
+            String seatName = seat.getText().toString();
+
+            // Check if seat was previously booked
+            if (previouslyBooked.contains(seatName)) {
+                seat.setBackgroundResource(R.drawable.seat_reserved);
+                seat.setEnabled(false);
+                seat.setTag("reserved");
+            }
             // Hardcoded reserved seats
-            if (seat.getId() == R.id.A1 ||
+            else if (seat.getId() == R.id.A1 ||
                     seat.getId() == R.id.B4 ||
                     seat.getId() == R.id.C7) {
                 seat.setBackgroundResource(R.drawable.seat_reserved);
@@ -175,16 +194,16 @@ public class SeatSelectionFragment extends Fragment {
             seat.setOnClickListener(v -> {
                 if ("reserved".equals(seat.getTag())) return;
 
-                String seatName = seat.getText().toString();
+                String name = seat.getText().toString();
                 if ("available".equals(seat.getTag())) {
                     seat.setBackgroundResource(R.drawable.seat_selected);
                     seat.setTag("selected");
-                    seats.add(seatName);
+                    seats.add(name);
                     selectedCount++;
                 } else if ("selected".equals(seat.getTag())) {
                     seat.setBackgroundResource(R.drawable.seat_available);
                     seat.setTag("available");
-                    seats.remove(seatName);
+                    seats.remove(name);
                     selectedCount--;
                 }
                 updateSeatCount();
@@ -207,5 +226,22 @@ public class SeatSelectionFragment extends Fragment {
 
     private void updateSeatCount() {
         seatCountText.setText(String.valueOf(selectedCount));
+    }
+
+    // ── Persist booked seats per movie ────────────────────────────────────
+    private void saveBookedSeats(String movieName, ArrayList<String> bookedSeats) {
+        SharedPreferences prefs = requireActivity()
+                .getSharedPreferences("booked_seats", Context.MODE_PRIVATE);
+        // Get existing booked seats for this movie and add new ones
+        Set<String> existing = prefs.getStringSet(movieName, new HashSet<>());
+        Set<String> updated = new HashSet<>(existing);
+        updated.addAll(bookedSeats);
+        prefs.edit().putStringSet(movieName, updated).apply();
+    }
+
+    private Set<String> getBookedSeats(String movieName) {
+        SharedPreferences prefs = requireActivity()
+                .getSharedPreferences("booked_seats", Context.MODE_PRIVATE);
+        return prefs.getStringSet(movieName, new HashSet<>());
     }
 }

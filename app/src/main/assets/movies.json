@@ -44,5 +44,31 @@
       "trailerUrl": "https://www.youtube.com/watch?v=JfVOs4VSpmA",
       "posterDrawable": "spiderman"
     }
+  ],
+  "tomorrow": [
+    {
+      "name": "Inception",
+      "genre": "Sci-fi",
+      "duration": "148 min",
+      "date": "Tomorrow",
+      "trailerUrl": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+      "posterDrawable": "inception"
+    },
+    {
+      "name": "The Lion King",
+      "genre": "Animation",
+      "duration": "118 min",
+      "date": "Tomorrow",
+      "trailerUrl": "https://www.youtube.com/watch?v=7TavVZMewpY",
+      "posterDrawable": "lionking"
+    },
+    {
+      "name": "Spider-Man",
+      "genre": "Action",
+      "duration": "148 min",
+      "date": "Tomorrow",
+      "trailerUrl": "https://www.youtube.com/watch?v=JfVOs4VSpmA",
+      "posterDrawable": "spiderman"
+    }
   ]
 }

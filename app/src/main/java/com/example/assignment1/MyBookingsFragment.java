@@ -35,6 +35,7 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
     private BookingAdapter adapter;
     private ArrayList<Booking> bookingList = new ArrayList<>();
     private DatabaseReference bookingsRef;
+    private ValueEventListener bookingsListener;
     private String userId;
 
     @Nullable
@@ -67,7 +68,8 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
     }
 
     private void loadBookings() {
-        bookingsRef.addValueEventListener(new ValueEventListener() {
+        // Use addListenerForSingleValueEvent to prevent duplicate loading
+        bookingsListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 bookingList.clear();
@@ -84,10 +86,22 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Failed to load bookings: " + error.getMessage(),
-                        Toast.LENGTH_SHORT).show();
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Failed to load bookings: " + error.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
             }
-        });
+        };
+        bookingsRef.addListenerForSingleValueEvent(bookingsListener);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Clean up listener to prevent leaks
+        if (bookingsRef != null && bookingsListener != null) {
+            bookingsRef.removeEventListener(bookingsListener);
+        }
     }
 
     private void updateEmptyState() {

@@ -35,6 +35,7 @@ import java.util.Locale;
 public class TicketSummaryFragment extends Fragment {
 
     private static final double TICKET_PRICE_PER_SEAT = 10.0;
+    private boolean bookingSaved = false; // Prevent duplicate saves
 
     // Snack prices
     private final double BURGER_PRICE = 14.99;
@@ -104,8 +105,11 @@ public class TicketSummaryFragment extends Fragment {
         // ── Save to SharedPreferences ─────────────────────────────────────
         saveLastBooking(movieName, seatCount, grandTotal);
 
-        // ── Save to Firebase Realtime Database ────────────────────────────
-        saveBookingToFirebase(movieName, seatCount, grandTotal, posterResId);
+        // ── Save to Firebase (only once) ──────────────────────────────────
+        if (!bookingSaved) {
+            saveBookingToFirebase(movieName, seatCount, grandTotal, posterResId);
+            bookingSaved = true;
+        }
 
         // ── Back button ───────────────────────────────────────────────────
         btnBack.setOnClickListener(v ->
