@@ -27,6 +27,7 @@ public class SnacksFragment extends Fragment {
     private String movieName;
     private ArrayList<String> selectedSeats;
     private int seatCount;
+    private boolean isTomorrow;
 
     @Nullable
     @Override
@@ -42,8 +43,7 @@ public class SnacksFragment extends Fragment {
             movieName     = args.getString("movieName", "");
             selectedSeats = args.getStringArrayList("selectedSeats");
             seatCount     = args.getInt("seatCount", 0);
-
-
+            isTomorrow    = args.getBoolean("isTomorrow", false);
         }
 
         tvTotal = view.findViewById(R.id.tvSnackTotal);
@@ -70,6 +70,7 @@ public class SnacksFragment extends Fragment {
             bundle.putStringArrayList("selectedSeats", selectedSeats);
             bundle.putInt("seatCount", seatCount);
             bundle.putDouble("snackTotal", snackTotal);
+            bundle.putBoolean("isTomorrow", isTomorrow);
             bundle.putInt("burgerQty",  snackList.size() > 0 ? snackList.get(0).getQuantity() : 0);
             bundle.putInt("pizzaQty",   snackList.size() > 1 ? snackList.get(1).getQuantity() : 0);
             bundle.putInt("drinkQty",   snackList.size() > 2 ? snackList.get(2).getQuantity() : 0);

@@ -30,6 +30,7 @@ public class SeatSelectionFragment extends Fragment {
     String movieName;
     String trailerUrl;
     boolean isComingSoon;
+    boolean isTomorrow;
     int posterResId;
     TextView seatCountText;
     ArrayList<String> seats = new ArrayList<>();
@@ -49,6 +50,7 @@ public class SeatSelectionFragment extends Fragment {
             movieName    = args.getString("movieName", "");
             trailerUrl   = args.getString("trailerUrl", "");
             isComingSoon = args.getBoolean("isComingSoon", false);
+            isTomorrow   = args.getBoolean("isTomorrow", false);
             posterResId = args.getInt("posterResId", R.drawable.frank);
 
             seats = args.getStringArrayList("selectedSeats") != null
@@ -114,6 +116,7 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putString("movieName", movieName);
             bundle.putStringArrayList("selectedSeats", seats);
             bundle.putInt("seatCount", selectedCount);
+            bundle.putBoolean("isTomorrow", isTomorrow);
             bundle.putInt("posterResId", posterResId);
             snacksFrag.setArguments(bundle);
             Log.d("SeatSelection", "Sending seats: " + seats + ", count: " + selectedCount);
@@ -135,6 +138,7 @@ public class SeatSelectionFragment extends Fragment {
             bundle.putStringArrayList("selectedSeats", seats);
             bundle.putInt("seatCount", selectedCount);
             bundle.putDouble("snackTotal", 0.0);
+            bundle.putBoolean("isTomorrow", isTomorrow);
             bundle.putInt("posterResId", posterResId);
             summaryFrag.setArguments(bundle);
             ((MainActivity) requireActivity()).navigateTo(summaryFrag);

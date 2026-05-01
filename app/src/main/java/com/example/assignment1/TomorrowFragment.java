@@ -55,7 +55,7 @@ public class TomorrowFragment extends Fragment {
         RecyclerView recycler = view.findViewById(R.id.recyclerTomorrow);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         // Pass isTomorrow=true so bookings get a future date
-        recycler.setAdapter(new MovieAdapter(requireActivity(), movies, false));
+        recycler.setAdapter(new MovieAdapter(requireActivity(), movies, false, true));
 
         return view;
     }

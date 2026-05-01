@@ -58,12 +58,14 @@ public class TicketSummaryFragment extends Fragment {
         int posterResId           = R.drawable.frank;
         double snackTotal         = 0;
         int burgerQty = 0, pizzaQty = 0, drinkQty = 0, nachosQty = 0;
+        boolean isTomorrow = false;
         ArrayList<String> selectedSeats = new ArrayList<>();
 
         if (args != null) {
             movieName     = args.getString("movieName", "");
             seatCount     = args.getInt("seatCount", 0);
             snackTotal    = args.getDouble("snackTotal", 0);
+            isTomorrow    = args.getBoolean("isTomorrow", false);
             posterResId   = args.getInt("posterResId", R.drawable.frank);
             burgerQty     = args.getInt("burgerQty", 0);
             pizzaQty      = args.getInt("pizzaQty", 0);
@@ -107,7 +109,7 @@ public class TicketSummaryFragment extends Fragment {
 
         // ── Save to Firebase (only once) ──────────────────────────────────
         if (!bookingSaved) {
-            saveBookingToFirebase(movieName, seatCount, grandTotal, posterResId);
+            saveBookingToFirebase(movieName, seatCount, grandTotal, posterResId, isTomorrow);
             bookingSaved = true;
         }
 
@@ -131,7 +133,7 @@ public class TicketSummaryFragment extends Fragment {
 
     // ── Save booking to Firebase ──────────────────────────────────────────
     private void saveBookingToFirebase(String movieName, int seatCount,
-                                       double totalPrice, int posterResId) {
+                                       double totalPrice, int posterResId, boolean isTomorrow) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
 
@@ -142,9 +144,13 @@ public class TicketSummaryFragment extends Fragment {
         String bookingId = bookingsRef.push().getKey();
         if (bookingId == null) return;
 
-        // Get current date/time
+        // Get current date/time, add 24 hours if it's a tomorrow booking
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-        String dateTime = sdf.format(new Date());
+        Date date = new Date();
+        if (isTomorrow) {
+            date = new Date(date.getTime() + (1000 * 60 * 60 * 24));
+        }
+        String dateTime = sdf.format(date);
 
         // Resolve poster drawable name from resource ID
         String posterDrawableName = "";
