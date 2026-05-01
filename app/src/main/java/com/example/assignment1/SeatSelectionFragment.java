@@ -39,18 +39,18 @@ public class SeatSelectionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_seat_selection, container, false);
 
         // Receive bundle data
         Bundle args = getArguments();
         if (args != null) {
-            movieName    = args.getString("movieName", "");
-            trailerUrl   = args.getString("trailerUrl", "");
+            movieName = args.getString("movieName", "");
+            trailerUrl = args.getString("trailerUrl", "");
             isComingSoon = args.getBoolean("isComingSoon", false);
-            isTomorrow   = args.getBoolean("isTomorrow", false);
+            isTomorrow = args.getBoolean("isTomorrow", false);
             posterResId = args.getInt("posterResId", R.drawable.frank);
 
             seats = args.getStringArrayList("selectedSeats") != null
@@ -59,16 +59,15 @@ public class SeatSelectionFragment extends Fragment {
             selectedCount = args.getInt("seatCount", 0);
         }
 
-        txtTitle      = view.findViewById(R.id.txtTitle);
-        btnBack       = view.findViewById(R.id.btnBack);
+        txtTitle = view.findViewById(R.id.txtTitle);
+        btnBack = view.findViewById(R.id.btnBack);
         seatCountText = view.findViewById(R.id.seatCountText);
         txtTitle.setText(movieName);
 
-        btnBack.setOnClickListener(v ->
-                ((MainActivity) requireActivity()).navigateTo(new HomeFragment()));
+        btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
 
         Button btnSnacks = view.findViewById(R.id.btnSnacks);
-        Button btnBook   = view.findViewById(R.id.btnBook);
+        Button btnBook = view.findViewById(R.id.btnBook);
 
         if (isComingSoon) {
             setupComingSoonMode(view, btnSnacks, btnBook);
@@ -145,7 +144,8 @@ public class SeatSelectionFragment extends Fragment {
 
     private void setupComingSoonMode(View view, Button btnSnacks, Button btnBook) {
         GridLayout grid = view.findViewById(R.id.seatGrid);
-        for (int i = 0; i < grid.getChildCount(); i++) grid.getChildAt(i).setEnabled(false);
+        for (int i = 0; i < grid.getChildCount(); i++)
+            grid.getChildAt(i).setEnabled(false);
 
         seatCountText.setVisibility(View.GONE);
         btnSnacks.setText("Coming Soon");
@@ -169,7 +169,8 @@ public class SeatSelectionFragment extends Fragment {
 
         for (int i = 0; i < grid.getChildCount(); i++) {
             View child = grid.getChildAt(i);
-            if (!(child instanceof Button)) continue;
+            if (!(child instanceof Button))
+                continue;
             Button seat = (Button) child;
 
             String seatName = seat.getResources().getResourceEntryName(seat.getId());
@@ -193,7 +194,8 @@ public class SeatSelectionFragment extends Fragment {
             }
 
             seat.setOnClickListener(v -> {
-                if ("reserved".equals(seat.getTag())) return;
+                if ("reserved".equals(seat.getTag()))
+                    return;
 
                 String name = seat.getResources().getResourceEntryName(seat.getId());
                 if ("available".equals(seat.getTag())) {
@@ -216,7 +218,8 @@ public class SeatSelectionFragment extends Fragment {
         GridLayout grid = view.findViewById(R.id.seatGrid);
         for (int i = 0; i < grid.getChildCount(); i++) {
             View child = grid.getChildAt(i);
-            if (!(child instanceof Button)) continue;
+            if (!(child instanceof Button))
+                continue;
             Button seat = (Button) child;
             if (seats.contains(seat.getResources().getResourceEntryName(seat.getId()))) {
                 seat.setBackgroundResource(R.drawable.seat_selected);

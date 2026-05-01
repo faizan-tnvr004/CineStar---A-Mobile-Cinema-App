@@ -72,14 +72,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            clearBackStack();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment())
                     .commit();
         } else if (id == R.id.nav_my_bookings) {
+            clearBackStack();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new MyBookingsFragment())
+                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_logout) {
             logout();
@@ -87,6 +90,10 @@ public class MainActivity extends AppCompatActivity
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void clearBackStack() {
+        getSupportFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void logout() {

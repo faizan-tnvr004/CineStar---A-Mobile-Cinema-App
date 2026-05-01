@@ -128,8 +128,7 @@ public class TicketSummaryFragment extends Fragment {
         }
 
         // ── Back button ───────────────────────────────────────────────────
-        btnBack.setOnClickListener(v ->
-                ((MainActivity) requireActivity()).navigateTo(new HomeFragment()));
+        btnBack.setOnClickListener(v -> ((MainActivity) requireActivity()).clearBackStack());
 
         // ── Send Ticket via Email ─────────────────────────────────────────
         String finalMovieName  = movieName;

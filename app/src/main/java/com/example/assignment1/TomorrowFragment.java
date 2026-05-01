@@ -33,9 +33,7 @@ public class TomorrowFragment extends Fragment {
 
         // ── Today button → go back to HomeFragment ───────────────────────
         MaterialButton btnToday = view.findViewById(R.id.btnToday);
-        btnToday.setOnClickListener(v -> {
-            ((MainActivity) requireActivity()).navigateTo(new HomeFragment());
-        });
+        btnToday.setOnClickListener(v -> requireActivity().onBackPressed());
 
         // ── Tomorrow button (already selected) ───────────────────────────
         MaterialButton btnTomorrow = view.findViewById(R.id.btnTomorrow);
