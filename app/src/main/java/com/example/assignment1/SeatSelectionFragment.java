@@ -172,7 +172,7 @@ public class SeatSelectionFragment extends Fragment {
             if (!(child instanceof Button)) continue;
             Button seat = (Button) child;
 
-            String seatName = seat.getText().toString();
+            String seatName = seat.getResources().getResourceEntryName(seat.getId());
 
             // Check if seat was previously booked
             if (previouslyBooked.contains(seatName)) {
@@ -195,7 +195,7 @@ public class SeatSelectionFragment extends Fragment {
             seat.setOnClickListener(v -> {
                 if ("reserved".equals(seat.getTag())) return;
 
-                String name = seat.getText().toString();
+                String name = seat.getResources().getResourceEntryName(seat.getId());
                 if ("available".equals(seat.getTag())) {
                     seat.setBackgroundResource(R.drawable.seat_selected);
                     seat.setTag("selected");
@@ -218,7 +218,7 @@ public class SeatSelectionFragment extends Fragment {
             View child = grid.getChildAt(i);
             if (!(child instanceof Button)) continue;
             Button seat = (Button) child;
-            if (seats.contains(seat.getText().toString())) {
+            if (seats.contains(seat.getResources().getResourceEntryName(seat.getId()))) {
                 seat.setBackgroundResource(R.drawable.seat_selected);
                 seat.setTag("selected");
             }
