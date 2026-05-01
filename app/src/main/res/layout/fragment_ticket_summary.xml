@@ -39,10 +39,15 @@
                 android:textStyle="bold"
                 android:gravity="center" />
 
-            <!-- Spacer to balance the back button -->
-            <View
+            <ImageButton
+                android:id="@+id/btnMenu"
                 android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:src="@drawable/ic_three_dots"
+                android:rotation="90"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/white"
+                android:contentDescription="Menu" />
 
         </LinearLayout>
 

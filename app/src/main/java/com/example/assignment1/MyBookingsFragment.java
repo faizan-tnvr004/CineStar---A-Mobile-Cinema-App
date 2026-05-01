@@ -48,6 +48,20 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
 
         recyclerView = view.findViewById(R.id.recyclerBookings);
         tvEmptyState = view.findViewById(R.id.tvEmptyState);
+        
+        View btnBack = view.findViewById(R.id.btnBack);
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
+        }
+        
+        View btnMenu = view.findViewById(R.id.btnMenu);
+        if (btnMenu != null) {
+            btnMenu.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).openDrawer();
+                }
+            });
+        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new BookingAdapter(requireContext(), bookingList, this);

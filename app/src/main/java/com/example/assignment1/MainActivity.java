@@ -40,8 +40,12 @@ public class MainActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Update nav header with user email
-        updateNavHeader();
+        // Setup back arrow click listener to close drawer
+        View headerView = navigationView.getHeaderView(0);
+        View btnCloseDrawer = headerView.findViewById(R.id.ivCloseDrawer);
+        if (btnCloseDrawer != null) {
+            btnCloseDrawer.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.START));
+        }
 
         // Load HomeFragment on first launch only
         if (savedInstanceState == null) {
@@ -53,19 +57,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void updateNavHeader() {
-        View headerView = navigationView.getHeaderView(0);
-        TextView tvEmail = headerView.findViewById(R.id.tvNavHeaderEmail);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null && user.getEmail() != null) {
-            tvEmail.setText(user.getEmail());
-        } else {
-            SharedPreferences prefs = getSharedPreferences("cinefast_session_pref_v3", MODE_PRIVATE);
-            String email = prefs.getString("userEmail", "user@example.com");
-            tvEmail.setText(email);
-        }
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

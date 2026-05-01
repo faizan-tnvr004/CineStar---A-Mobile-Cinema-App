@@ -130,6 +130,16 @@ public class TicketSummaryFragment extends Fragment {
         // ── Back button ───────────────────────────────────────────────────
         btnBack.setOnClickListener(v -> ((MainActivity) requireActivity()).clearBackStack());
 
+        // ── Menu button ───────────────────────────────────────────────────
+        ImageButton btnMenu = view.findViewById(R.id.btnMenu);
+        if (btnMenu != null) {
+            btnMenu.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).openDrawer();
+                }
+            });
+        }
+
         // ── Send Ticket via Email ─────────────────────────────────────────
         String finalMovieName  = movieName;
         int    finalSeatCount  = seatCount;
