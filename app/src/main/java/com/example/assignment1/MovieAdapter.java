@@ -22,15 +22,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     private ArrayList<Movie> movieList;
     private FragmentActivity activity;
-
-    // Add this field at the top
     private boolean isComingSoon;
+    private boolean isTomorrow;
 
-    // Updated constructor
     public MovieAdapter(FragmentActivity activity, ArrayList<Movie> movieList, boolean isComingSoon) {
         this.activity     = activity;
         this.movieList    = movieList;
         this.isComingSoon = isComingSoon;
+        this.isTomorrow  = false;
+    }
+
+    public MovieAdapter(FragmentActivity activity, ArrayList<Movie> movieList, boolean isComingSoon, boolean isTomorrow) {
+        this.activity     = activity;
+        this.movieList    = movieList;
+        this.isComingSoon = isComingSoon;
+        this.isTomorrow  = isTomorrow;
     }
 
     @NonNull
@@ -69,6 +75,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             bundle.putString("movieGenre", movie.getGenre());
             bundle.putString("trailerUrl", movie.getTrailerUrl());
             bundle.putBoolean("isComingSoon", isComingSoon);
+            bundle.putBoolean("isTomorrow", isTomorrow);
             bundle.putInt("posterResId", posterResId);
             seatFrag.setArguments(bundle);
 
