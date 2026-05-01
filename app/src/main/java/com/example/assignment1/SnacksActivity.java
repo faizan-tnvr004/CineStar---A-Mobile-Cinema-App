@@ -15,23 +15,23 @@ import java.util.ArrayList;
 
 public class SnacksActivity extends AppCompatActivity {
 
-    //prices
+    // prices
     private final double PRICE_BURGER = 14.99;
     private final double PRICE_PIZZA = 9.99;
     private final double PRICE_DRINK = 6.99;
     private final double PRICE_NACHOS = 15.00;
     ArrayList<String> selectedSeats;
-    //quantities
+    // quantities
     private int burgerQty = 0;
     private int pizzaQty = 0;
     private int drinkQty = 0;
     private int nachosQty = 0;
 
-    //views
+    // views
     private TextView qty1, qty2, qty3, qty4, totalSnackPrice;
     private Button plus1, minus1, plus2, minus2, plus3, minus3, plus4, minus4, btnProceedBooking;
 
-    //receiveddata
+    // receiveddata
     private String movieName;
     private int seatCount;
     private double ticketTotal;
@@ -48,7 +48,7 @@ public class SnacksActivity extends AppCompatActivity {
             return insets;
         });
 
-        //receivedatafrompreviousscreen
+        // receive datafrom previous screen
         Intent intent = getIntent();
         movieName = intent.getStringExtra("movieName");
         seatCount = intent.getIntExtra("seatCount", 0);
@@ -149,24 +149,24 @@ public class SnacksActivity extends AppCompatActivity {
             bookingIntent.putExtra("seatCount", seatCount);
             bookingIntent.putExtra("ticketTotal", ticketTotal);
             bookingIntent.putExtra("snackTotal", calculateSnackTotal());
-            bookingIntent.putExtra("ticketPricePerSeat", 10.0); //or dynamic
+            bookingIntent.putExtra("ticketPricePerSeat", 10.0); // or dynamic
             bookingIntent.putExtra("pizzaQty", pizzaQty);
             bookingIntent.putExtra("burgerQty", burgerQty);
             bookingIntent.putExtra("drinkQty", drinkQty);
             bookingIntent.putExtra("nachosQty", nachosQty);
-            bookingIntent.putExtra("selectedSeats",selectedSeats);
+            bookingIntent.putExtra("selectedSeats", selectedSeats);
 
             startActivity(bookingIntent);
         });
     }
 
-    //updatetotalsnackprice
+    // updatetotalsnackprice
     private void updateTotal() {
         double total = calculateSnackTotal();
         totalSnackPrice.setText("snacks total: $" + String.format("%.2f", total));
     }
 
-    //calculatesnacktotal
+    // calculatesnacktotal
     private double calculateSnackTotal() {
         return (burgerQty * PRICE_BURGER)
                 + (pizzaQty * PRICE_PIZZA)
