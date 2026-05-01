@@ -24,8 +24,9 @@ public class onboarding extends AppCompatActivity {
         });
         init();
         Btnstart.setOnClickListener(v->{
-            startActivity(new Intent(this,MainActivity.class));
-          //  finish();
+            // Navigate to LoginActivity instead of MainActivity
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         });
     }
 

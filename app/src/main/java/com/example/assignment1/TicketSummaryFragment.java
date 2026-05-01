@@ -21,8 +21,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class TicketSummaryFragment extends Fragment {
 
@@ -96,6 +104,9 @@ public class TicketSummaryFragment extends Fragment {
         // ── Save to SharedPreferences ─────────────────────────────────────
         saveLastBooking(movieName, seatCount, grandTotal);
 
+        // ── Save to Firebase Realtime Database ────────────────────────────
+        saveBookingToFirebase(movieName, seatCount, grandTotal, posterResId);
+
         // ── Back button ───────────────────────────────────────────────────
         btnBack.setOnClickListener(v ->
                 ((MainActivity) requireActivity()).navigateTo(new HomeFragment()));
@@ -112,6 +123,37 @@ public class TicketSummaryFragment extends Fragment {
                         finalTicketTotal, finalSnackTotal, finalGrandTotal));
 
         return view;
+    }
+
+    // ── Save booking to Firebase ──────────────────────────────────────────
+    private void saveBookingToFirebase(String movieName, int seatCount,
+                                       double totalPrice, int posterResId) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        String userId = user.getUid();
+        DatabaseReference bookingsRef = FirebaseDatabase.getInstance()
+                .getReference("bookings").child(userId);
+
+        String bookingId = bookingsRef.push().getKey();
+        if (bookingId == null) return;
+
+        // Get current date/time
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        String dateTime = sdf.format(new Date());
+
+        // Resolve poster drawable name from resource ID
+        String posterDrawableName = "";
+        try {
+            posterDrawableName = requireContext().getResources().getResourceEntryName(posterResId);
+        } catch (Exception e) {
+            posterDrawableName = "frank";
+        }
+
+        Booking booking = new Booking(bookingId, userId, movieName, seatCount,
+                totalPrice, dateTime, posterDrawableName);
+
+        bookingsRef.child(bookingId).setValue(booking);
     }
 
     // ── Add a snack row dynamically (only if qty > 0) ─────────────────────

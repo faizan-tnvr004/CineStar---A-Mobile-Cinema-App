@@ -1,6 +1,7 @@
 package com.example.assignment1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -30,15 +31,25 @@ public class Splash extends AppCompatActivity {
         });
         init();
         applyAnimation();
-        moveToOnBoard();
+        moveToNext();
     }
     private void applyAnimation(){
         logo.setAnimation(logo_anim);
 
     }
-    private void moveToOnBoard(){
+    private void moveToNext(){
         new Handler().postDelayed(()->{
-            startActivity(new Intent(this,onboarding.class));
+            // Check if user is already logged in
+            SharedPreferences prefs = getSharedPreferences("cinefast_session_pref_v3", MODE_PRIVATE);
+            boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
+
+            if (isLoggedIn) {
+                // Skip login, go directly to MainActivity
+                startActivity(new Intent(this, MainActivity.class));
+            } else {
+                // Go to onboarding
+                startActivity(new Intent(this, onboarding.class));
+            }
             finish();
 
         }, 5000);

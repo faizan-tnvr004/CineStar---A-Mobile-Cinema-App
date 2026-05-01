@@ -43,16 +43,10 @@ public class HomeFragment extends Fragment {
         // ── Three-dots menu ───────────────────────────────────────────────
         ImageButton btnMenu = view.findViewById(R.id.btnMenu);
         btnMenu.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(requireContext(), btnMenu);
-            popup.getMenu().add("View Last Booking");
-            popup.setOnMenuItemClickListener(item -> {
-                if (item.getTitle().equals("View Last Booking")) {
-                    showLastBooking();
-                    return true;
-                }
-                return false;
-            });
-            popup.show();
+            // Open the navigation drawer
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openDrawer();
+            }
         });
 
         return view;

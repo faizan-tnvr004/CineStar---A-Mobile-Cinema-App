@@ -49,11 +49,9 @@ public class SnacksFragment extends Fragment {
         tvTotal = view.findViewById(R.id.tvSnackTotal);
         ListView listView = view.findViewById(R.id.listSnacks);
 
-        // Populate snack data — use your existing drawables
-        snackList.add(new Snack("Burger Combo",  14.99, R.drawable.food1));
-        snackList.add(new Snack("Pizza",          9.99, R.drawable.food2));
-        snackList.add(new Snack("Pina Colada",    6.99, R.drawable.food3));
-        snackList.add(new Snack("Nachos",        15.00, R.drawable.food4));
+        // Load snacks from SQLite Database
+        SnackDatabaseHelper dbHelper = new SnackDatabaseHelper(requireContext());
+        snackList = dbHelper.getAllSnacks();
 
         // Adapter — updates total whenever +/- is pressed
         adapter = new SnackAdapter(requireContext(), snackList, this::updateTotal);
@@ -72,10 +70,10 @@ public class SnacksFragment extends Fragment {
             bundle.putStringArrayList("selectedSeats", selectedSeats);
             bundle.putInt("seatCount", seatCount);
             bundle.putDouble("snackTotal", snackTotal);
-            bundle.putInt("burgerQty",  snackList.get(0).getQuantity());
-            bundle.putInt("pizzaQty",   snackList.get(1).getQuantity());
-            bundle.putInt("drinkQty",   snackList.get(2).getQuantity());
-            bundle.putInt("nachosQty",  snackList.get(3).getQuantity());
+            bundle.putInt("burgerQty",  snackList.size() > 0 ? snackList.get(0).getQuantity() : 0);
+            bundle.putInt("pizzaQty",   snackList.size() > 1 ? snackList.get(1).getQuantity() : 0);
+            bundle.putInt("drinkQty",   snackList.size() > 2 ? snackList.get(2).getQuantity() : 0);
+            bundle.putInt("nachosQty",  snackList.size() > 3 ? snackList.get(3).getQuantity() : 0);
             bundle.putInt("posterResId", getArguments() != null ? getArguments().getInt("posterResId") : 0);
             summaryFrag.setArguments(bundle);
 

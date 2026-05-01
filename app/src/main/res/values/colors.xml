@@ -4,5 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#400C00</color>
     <color name="light_red">#b50404</color>
+    <color name="dark_card_bg">#21293B</color>
+    <color name="hint_gray">#666666</color>
+    <color name="text_secondary">#8892B0</color>
+    <color name="dark_surface">#1C1C1C</color>
+    <color name="dark_bg">#1C2230</color>
 
 </resources>

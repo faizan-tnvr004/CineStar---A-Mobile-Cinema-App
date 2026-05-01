@@ -1,0 +1,48 @@
+{
+  "now_showing": [
+    {
+      "name": "Frankenstein",
+      "genre": "Sci-fi",
+      "duration": "150 min",
+      "trailerUrl": "https://www.youtube.com/watch?v=8aulMPhE12g",
+      "posterDrawable": "frank"
+    },
+    {
+      "name": "Zootopia",
+      "genre": "Comedy",
+      "duration": "147 min",
+      "trailerUrl": "https://www.youtube.com/watch?v=BjkIOU5PhyQ",
+      "posterDrawable": "zoo"
+    },
+    {
+      "name": "Donkey King",
+      "genre": "Comedy",
+      "duration": "105 min",
+      "trailerUrl": "https://www.youtube.com/watch?v=9o996V_puWU",
+      "posterDrawable": "donkey"
+    }
+  ],
+  "coming_soon": [
+    {
+      "name": "Inception",
+      "genre": "Sci-fi",
+      "duration": "148 min",
+      "trailerUrl": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+      "posterDrawable": "inception"
+    },
+    {
+      "name": "The Lion King",
+      "genre": "Animation",
+      "duration": "118 min",
+      "trailerUrl": "https://www.youtube.com/watch?v=7TavVZMewpY",
+      "posterDrawable": "lionking"
+    },
+    {
+      "name": "Spider-Man",
+      "genre": "Action",
+      "duration": "148 min",
+      "trailerUrl": "https://www.youtube.com/watch?v=JfVOs4VSpmA",
+      "posterDrawable": "spiderman"
+    }
+  ]
+}

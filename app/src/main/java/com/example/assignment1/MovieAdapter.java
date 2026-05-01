@@ -23,6 +23,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private ArrayList<Movie> movieList;
     private FragmentActivity activity;
 
+    // Add this field at the top
+    private boolean isComingSoon;
+
     // Updated constructor
     public MovieAdapter(FragmentActivity activity, ArrayList<Movie> movieList, boolean isComingSoon) {
         this.activity     = activity;
@@ -30,8 +33,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.isComingSoon = isComingSoon;
     }
 
-    // Add this field at the top
-    private boolean isComingSoon;
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +45,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
 
-        holder.imgPoster.setImageResource(movie.getPosterResId());
+        // Resolve poster resource ID (handles both hardcoded and JSON-loaded movies)
+        int posterResId = movie.resolvePosterResId(activity);
+        if (posterResId != 0) {
+            holder.imgPoster.setImageResource(posterResId);
+        }
+
         holder.tvName.setText(movie.getName());
         holder.tvGenreDuration.setText(movie.getGenre() + " / " + movie.getDuration());
 
@@ -63,9 +69,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             bundle.putString("movieGenre", movie.getGenre());
             bundle.putString("trailerUrl", movie.getTrailerUrl());
             bundle.putBoolean("isComingSoon", isComingSoon);
-            bundle.putInt("posterResId", movie.getPosterResId());
-            seatFrag.setArguments(bundle);
-            ((MainActivity) activity).navigateTo(seatFrag);
+            bundle.putInt("posterResId", posterResId);
             seatFrag.setArguments(bundle);
 
             activity.getSupportFragmentManager()
